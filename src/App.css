@@ -10,6 +10,8 @@ body {
 .app {
   display: flex;
   justify-content: space-evenly;
+  padding: 20px;
+  background-color: #f5f6fa;
 }
 
 .app__left {
