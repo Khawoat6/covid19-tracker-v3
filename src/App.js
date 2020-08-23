@@ -10,6 +10,8 @@ import InfoBox from './InfoBox';
 import Map from './Map';
 import './App.css';
 import Table from './Table';
+import { sortData } from './util';
+import LineGraph from './LineGraph';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -46,7 +48,8 @@ function App() {
             value: country.countryInfo.iso2, // UK, USE, FR
           }));
 
-          setTableData(data);
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
@@ -75,7 +78,7 @@ function App() {
     // https://disease.sh/v3/covid-19/all
   };
 
-  console.log('COUNTRY INFO >>>> ', countryInfo);
+  // console.log('COUNTRY INFO >>>> ', countryInfo);
 
   return (
     <div className="app">
@@ -134,6 +137,7 @@ function App() {
           <Table countries={tableData}></Table>
           <h3>Worldwide new case</h3>
           {/* Graph */}
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
