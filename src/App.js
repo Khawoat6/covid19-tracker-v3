@@ -22,6 +22,7 @@ function App() {
   const [mapCenter, setMapCenter] = useState({ lat: 34.80764, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
   const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState('cases');
 
   // STATE = HOW to write a variable in REACT <<<<<<
 
@@ -113,6 +114,7 @@ function App() {
         <div className="app__stats">
           {/* InfoBoxes title="Coronavirus cases" */}
           <InfoBox
+            onClick={(e) => setCasesType('cases')}
             title="Coronarivus Cases"
             // cases={countryInfo.todayCase}
             // total={countryInfo.cases}
@@ -122,6 +124,7 @@ function App() {
 
           {/* InfoBoxes title="Coronavirus recoveries" */}
           <InfoBox
+            onClick={(e) => setCasesType('recovered')}
             title="Recovered"
             // cases={countryInfo.todayRecovered}
             // total={countryInfo.recovered}
@@ -131,6 +134,7 @@ function App() {
 
           {/* InfoBoxes title="Coronavirus deaths" */}
           <InfoBox
+            onClick={(e) => setCasesType('deaths')}
             title="Deaths"
             // cases={countryInfo.todayDeaths}
             // total={countryInfo.deaths}
@@ -140,7 +144,12 @@ function App() {
         </div>
 
         {/* Map */}
-        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
+        <Map
+          casesType={casesType}
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+        />
       </div>
 
       <Card className="app__right">
