@@ -13,6 +13,7 @@ import './App.css';
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
+  const [countryInfo, setCountryInfo] = useState({});
 
   // STATE = HOW to write a variable in REACT <<<<<<
 
@@ -20,6 +21,14 @@ function App() {
 
   // USE EFFECT = Runs a piece of code
   // based on a given condition
+
+  useEffect(() => {
+    fetch('https://disease.sh/v3/covid-19/all')
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      });
+  });
 
   useEffect(() => {
     // The code inside here will run once
@@ -45,8 +54,25 @@ function App() {
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
     // console.log('YOOOO >>>>', countryCode);
-    setCountry(countryCode);
+
+    const url =
+      countryCode === 'worldwide'
+        ? 'https://disease.sh/v3/covid-19/countries'
+        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+
+    await fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountry(countryCode);
+
+        // All of the data... from the country response
+        setCountryInfo(data);
+      });
+
+    // https://disease.sh/v3/covid-19/all
   };
+
+  console.log('COUNTRY INFO >>>> ', countryInfo);
 
   return (
     <div className="app">
@@ -73,13 +99,25 @@ function App() {
 
         <div className="app__stats">
           {/* InfoBoxes title="Coronavirus cases" */}
-          <InfoBox title="Coronarivus Cases" total={2000} />
+          <InfoBox
+            title="Coronarivus Cases"
+            cases={countryInfo.todayCases}
+            total={countryInfo.cases}
+          />
 
           {/* InfoBoxes title="Coronavirus recoveries" */}
-          <InfoBox title="Recovered" cases={1234} total={3000} />
+          <InfoBox
+            title="Recovered"
+            cases={countryInfo.todayRecovered}
+            total={countryInfo.recovered}
+          />
 
           {/* InfoBoxes title="Coronavirus deaths" */}
-          <InfoBox title="Deaths" cases={1234} total={4000} />
+          <InfoBox
+            title="Deaths"
+            cases={countryInfo.todayDeaths}
+            total={countryInfo.deaths}
+          />
         </div>
 
         {/* Map */}
