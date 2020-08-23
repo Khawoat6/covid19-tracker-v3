@@ -9,11 +9,13 @@ import {
 import InfoBox from './InfoBox';
 import Map from './Map';
 import './App.css';
+import Table from './Table';
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   // STATE = HOW to write a variable in REACT <<<<<<
 
@@ -44,6 +46,7 @@ function App() {
             value: country.countryInfo.iso2, // UK, USE, FR
           }));
 
+          setTableData(data);
           setCountries(countries);
         });
     };
@@ -128,6 +131,7 @@ function App() {
         <CardContent>
           <h3>Live Cases by Country</h3>
           {/* Table */}
+          <Table countries={tableData}></Table>
           <h3>Worldwide new case</h3>
           {/* Graph */}
         </CardContent>
