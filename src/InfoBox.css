@@ -23,3 +23,7 @@
 .infoBox--selected {
   border-top: 10px solid greenyellow;
 }
+
+.infoBox--red {
+  border-color: red;
+}

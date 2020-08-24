@@ -114,6 +114,7 @@ function App() {
         <div className="app__stats">
           {/* InfoBoxes title="Coronavirus cases" */}
           <InfoBox
+            isRed
             active={casesType === 'cases'}
             onClick={(e) => setCasesType('cases')}
             title="Coronarivus Cases"
@@ -136,6 +137,7 @@ function App() {
 
           {/* InfoBoxes title="Coronavirus deaths" */}
           <InfoBox
+            isRed
             active={casesType === 'deaths'}
             onClick={(e) => setCasesType('deaths')}
             title="Deaths"
