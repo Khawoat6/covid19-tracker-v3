@@ -114,6 +114,7 @@ function App() {
         <div className="app__stats">
           {/* InfoBoxes title="Coronavirus cases" */}
           <InfoBox
+            active={casesType === 'cases'}
             onClick={(e) => setCasesType('cases')}
             title="Coronarivus Cases"
             // cases={countryInfo.todayCase}
@@ -124,6 +125,7 @@ function App() {
 
           {/* InfoBoxes title="Coronavirus recoveries" */}
           <InfoBox
+            active={casesType === 'recovered'}
             onClick={(e) => setCasesType('recovered')}
             title="Recovered"
             // cases={countryInfo.todayRecovered}
@@ -134,6 +136,7 @@ function App() {
 
           {/* InfoBoxes title="Coronavirus deaths" */}
           <InfoBox
+            active={casesType === 'deaths'}
             onClick={(e) => setCasesType('deaths')}
             title="Deaths"
             // cases={countryInfo.todayDeaths}
